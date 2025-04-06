@@ -1,9 +1,15 @@
-﻿namespace CashFlow.Domain.Entities
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace CashFlow.Domain.Entities
 {
-    public class CounterParty : BaseEntity
+    public class Counterparty : BaseEntity
     {
+        [Required]
         public string Name { get; set; }
+
         public string Address { get; set; }
-        public string Identifier { get; set; } //CPF/CNPJ (could be a class for validation)
+
+        [Required]
+        public string Identifier { get; set; } //CPF/CNPJ (could be a class for additional validation)
     }
 }

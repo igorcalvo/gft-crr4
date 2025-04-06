@@ -6,3 +6,4 @@ Debug/
 /build/
 *.suo
 *.user
+*.db
