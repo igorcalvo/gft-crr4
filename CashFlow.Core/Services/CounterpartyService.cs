@@ -19,7 +19,7 @@ namespace CashFlow.Core.Services
         {
             counterparty.CreatedAt = DateTime.Now;
 
-            var existingConterparty = _counterpartyRepository.GetByIdAsync(counterparty.Id);
+            var existingConterparty = await _counterpartyRepository.GetByIdAsync(counterparty.Id);
             if (existingConterparty != null) throw new InvalidOperationException("Esse registro já existe");
 
             // Adicionaria alguma logica de validacao antes de adicioná-la

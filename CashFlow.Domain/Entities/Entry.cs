@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 using CashFlow.Domain.Enums;
 
 namespace CashFlow.Domain.Entities
@@ -14,6 +15,7 @@ namespace CashFlow.Domain.Entities
 
         [ForeignKey("Counterparty")]
         public Guid CounterPartyId { get; set; }
+
         public Counterparty Counterparty { get; set; }
     }
 }

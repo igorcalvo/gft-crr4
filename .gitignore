@@ -6,4 +6,6 @@ Debug/
 /build/
 *.suo
 *.user
-*.db
+*.db-shm
+*.db-wal
+cashflow.db

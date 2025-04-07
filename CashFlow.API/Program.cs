@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddOpenApiDocument();
 
 builder.Services.AddDbContext<CashFlowDbContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("Default")));
 
@@ -22,13 +22,15 @@ builder.Services.AddScoped<IConsolidationService, ConsolidationService>();
 builder.Services.AddScoped<IEntryService, EntryService>();
 builder.Services.AddScoped<ICounterpartyService, CounterpartyService>();
 
+builder.Services.AddAutoMapper(typeof(Program));
+
 
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseOpenApi();
+    app.UseSwaggerUi();
 }
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();

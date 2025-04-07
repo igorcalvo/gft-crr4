@@ -1,4 +1,5 @@
-﻿using CashFlow.Domain.Entities;
+﻿using CashFlow.Domain.DTOs;
+using CashFlow.Domain.Entities;
 
 namespace CashFlow.Core.Interfaces
 {
@@ -6,8 +7,8 @@ namespace CashFlow.Core.Interfaces
     {
         public Task DeleteAsync(Guid id);
 
-        public Task AddAsync(Entry entry);
+        public Task<Entry> AddAsync(EntryDto dto);
 
-        public Task UpdateAsync(Entry entry);
+        public Task<Entry> UpdateAsync(EntryDto dto);
     }
 }

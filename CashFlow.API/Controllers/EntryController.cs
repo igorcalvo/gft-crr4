@@ -1,6 +1,5 @@
 ﻿using CashFlow.Core.Interfaces;
-using CashFlow.Core.Services;
-using CashFlow.Domain.Entities;
+using CashFlow.Domain.DTOs;
 using CashFlow.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,6 +17,7 @@ namespace CashFlow.API.Controllers
         }
 
         [HttpGet]
+        [Route(nameof(GetAllFromDate))]
         public async Task<IActionResult> GetAllFromDate(DateTime date)
         {
             var entries = await _entryRepository.GetByDateAsync(date);
@@ -25,6 +25,7 @@ namespace CashFlow.API.Controllers
         }
 
         [HttpDelete]
+        [Route(nameof(Delete))]
         public async Task<IActionResult> Delete(Guid id)
         {
             await _entryService.DeleteAsync(id);
@@ -32,16 +33,18 @@ namespace CashFlow.API.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Update([FromBody] Entry entry)
+        [Route(nameof(Update))]
+        public async Task<IActionResult> Update([FromBody] EntryDto dto)
         {
-            await _entryService.UpdateAsync(entry);
+            var entry = await _entryService.UpdateAsync(dto);
             return Ok(entry.Id);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add([FromBody] Entry entry)
+        [Route(nameof(Add))]
+        public async Task<IActionResult> Add([FromBody] EntryDto dto)
         {
-            await _entryService.AddAsync(entry);
+            var entry = await _entryService.AddAsync(dto);
             return Ok(entry.Id);
         }
     }

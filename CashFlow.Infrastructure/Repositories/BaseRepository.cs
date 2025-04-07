@@ -17,7 +17,11 @@ namespace CashFlow.Infrastructure.Repositories
 
         public async Task<IEnumerable<T>> GetAllAsync() => await _dbSet.ToListAsync();
 
-        public async Task<T?> GetByIdAsync(Guid id) => await _dbSet.FindAsync(id);
+        public async Task<T?> GetByIdAsync(Guid id) {
+            if (id == Guid.Empty) return null;
+
+            return await _dbSet.FindAsync(id);
+        }
 
         public async Task AddAsync(T entity)
         {
@@ -33,6 +37,8 @@ namespace CashFlow.Infrastructure.Repositories
 
         public async Task DeleteAsync(Guid id)
         {
+            if (id == Guid.Empty) return;
+
             var entity = await GetByIdAsync(id);
 
             if (entity == null) throw new ArgumentException($"Entidade com id: {id} não pode ser encontrada.");

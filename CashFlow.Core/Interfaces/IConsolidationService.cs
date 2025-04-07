@@ -4,8 +4,8 @@ namespace CashFlow.Core.Interfaces
 {
     public interface IConsolidationService
     {
-       public Task<Consolidation> GetTodaysResult();
+       public Task<Consolidation?> GetTodaysResult();
 
-        public Task<Consolidation> GetResultFromDate(DateTime date);
+        public Task<Consolidation?> GetResultFromDate(DateTime date);
     }
 }

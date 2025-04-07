@@ -45,12 +45,6 @@ namespace CashFlow.Core.Services
         {
             return GetResultFromDate(DateTime.Today);
         }
-
-        public async Task UpdateConsolidation(Consolidation Consolidation)
-        {
-            // Também adicionaria alguma validação antes de atualizá-la
-            await _ConsolidationRepository.UpdateAsync(Consolidation);
-        }
     }
 }
 
