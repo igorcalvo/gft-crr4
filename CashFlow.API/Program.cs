@@ -5,6 +5,8 @@ using CashFlow.Domain.Interfaces;
 using CashFlow.Infrastructure.Data;
 using CashFlow.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Hangfire;
+using Hangfire.Storage.SQLite;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +26,13 @@ builder.Services.AddScoped<ICounterpartyService, CounterpartyService>();
 
 builder.Services.AddAutoMapper(typeof(Program));
 
+builder.Services.AddHangfire(configuration =>
+{
+    configuration.UseSimpleAssemblyNameTypeSerializer()
+                 .UseRecommendedSerializerSettings()
+                 .UseSQLiteStorage(builder.Configuration.GetConnectionString("Default"));
+});
+builder.Services.AddHangfireServer();
 
 var app = builder.Build();
 
@@ -37,4 +46,12 @@ app.UseMiddleware<ExceptionHandlingMiddleware>();
 //app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
+
+app.UseHangfireDashboard("/hangfire");
+
+RecurringJob.AddOrUpdate<ConsolidationService>(
+    "daily-consolidation",
+    service => service.AddConsolidation(),
+    Cron.Daily);
+
 app.Run();
