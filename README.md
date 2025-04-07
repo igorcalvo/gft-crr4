@@ -3,6 +3,10 @@ Sistema de fluxo de caixa com consolidação diária, categorização e visualiz
 
 ### Arquitetura
 
+![image](https://github.com/user-attachments/assets/efb52d58-bd83-4895-8136-4e19a47f02db)
+
+![image](https://github.com/user-attachments/assets/96f6a2d8-5152-40e5-b4da-756a10834a47)
+
 ### Funcionalidades principais
 
 - CRUD de **Entradas (Entries)** com tipo (crédito/débito), valor e contraparte
