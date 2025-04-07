@@ -20,5 +20,12 @@ namespace CashFlow.Infrastructure.Repositories
                 .Where(e => e.CreatedAt.Date == date.Date)
                 .ToListAsync();
         }
+
+        public async Task<IEnumerable<Entry>> GetByCounterpartyIdAsync(Guid CounterpartyId)
+        {
+            return await _context.Entries
+                .Where(e => e.CounterPartyId == CounterpartyId)
+                .ToListAsync();
+        }
     }
 }

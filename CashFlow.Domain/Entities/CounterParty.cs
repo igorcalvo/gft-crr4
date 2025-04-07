@@ -2,7 +2,7 @@
 
 namespace CashFlow.Domain.Entities
 {
-    public class Counterparty : BaseEntity
+    public class Counterparty : BaseEntry
     {
         [Required]
         public string Name { get; set; }

@@ -31,8 +31,12 @@ namespace CashFlow.Infrastructure.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(T entity)
+        public async Task DeleteAsync(Guid id)
         {
+            var entity = await GetByIdAsync(id);
+
+            if (entity == null) throw new ArgumentException($"Entidade com id: {id} não pode ser encontrada.");
+
             _dbSet.Remove(entity);
             await _context.SaveChangesAsync();
         }

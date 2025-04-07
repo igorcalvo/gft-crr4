@@ -8,6 +8,6 @@ namespace CashFlow.Domain.Interfaces
         Task<T?> GetByIdAsync(Guid id);
         Task AddAsync(T entity);
         Task UpdateAsync(T entity);
-        Task DeleteAsync(T entity);
+        Task DeleteAsync(Guid id);
     }
 }
